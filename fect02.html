@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photos</title>
+    <style>
+        /* [설명] 5열 그리드: 10개 항목이 자동으로 2행 5열로 배치됨 */
+        #app {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+        /* [설명] 카드 기본 스타일: transition으로 변화가 부드럽게 일어나게 함 */
+        figure {
+            margin: 0; text-align: center; cursor: pointer;
+            position: relative; z-index: 0;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        /* [설명] 클릭된 카드: 살짝 확대(앞으로 튀어나옴) + 그림자, z-index로 이웃 카드 위에 표시 */
+        figure.active {
+            transform: scale(1.12) translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+        img { width: 100%; height: auto; display: block; background: #eee; }
+        figcaption { font-size: 12px; margin-top: 4px; }
+    </style>
+</head>
+<body>
+    <h1>사진 목록</h1>
+    <!-- 사진이 렌더링될 영역 -->
+    <div id="app"></div>
+
+    <script>
+        // [설명] 재사용 가능한 비동기 함수: URL을 받아 JSON 데이터를 반환
+        const fetchJson = async (url) => {
+            // [설명] fetch 호출 후 응답이 올 때까지 await로 대기
+            const response = await fetch(url);
+            // [설명] fetch는 404/500에서도 reject하지 않으므로 ok 여부를 직접 검사
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            // [설명] 응답 본문을 JSON으로 파싱하여 반환
+            return await response.json();
+        };
+
+        // [설명] 재사용 가능한 렌더링 함수: 사진 배열을 figure(img + 제목)로 만들어 출력
+        const renderPhotos = (container, photos) => {
+            const figures = photos.map((photo) => {
+                const figure = document.createElement('figure');
+                const img = document.createElement('img');
+                img.src = photo.thumbnailUrl;
+                img.alt = photo.title;
+                const caption = document.createElement('figcaption');
+                caption.textContent = photo.title;
+                figure.append(img, caption);
+                return figure;
+            });
+            // [설명] 기존 내용을 비우고 한 번에 추가
+            container.replaceChildren(...figures);
+
+            // [설명] 이벤트 위임: 컨테이너 하나에 click 리스너를 달아 카드 클릭을 처리
+            container.addEventListener('click', (e) => {
+                const card = e.target.closest('figure');
+                if (!card) return;
+                const wasActive = card.classList.contains('active');
+                // [설명] 다른 카드의 active는 해제하여 한 번에 하나만 튀어나오게 함
+                container.querySelectorAll('figure.active').forEach((f) => f.classList.remove('active'));
+                // [설명] 이미 눌려 있던 카드면 해제(토글), 아니면 활성화
+                if (!wasActive) card.classList.add('active');
+            });
+        };
+
+        // [설명] 메인 비동기 함수: 데이터 요청 → 처음 count개만 잘라서 화면 출력
+        const showPhotos = async (count = 20) => {
+            const app = document.getElementById('app');
+            try {
+                const photos = await fetchJson('https://jsonplaceholder.typicode.com/photos');
+                renderPhotos(app, photos.slice(0, count));
+            } catch (error) {
+                app.textContent = `불러오기 실패: ${error.message}`;
+            }
+        };
+
+        // [설명] 실행
+        showPhotos();
+    </script>
+</body>
+</html>

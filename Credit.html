@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>크레딧노트</title>
+<link rel="stylesheet" href="./css/credit.css">
+</head>
+<body>
+<div class="container">
+  <div class="util">
+    <a href="#">로그인</a><a href="#">회원가입</a>
+  </div>
+
+  <header class="header">
+    <div class="logo">
+      <div class="logo-mark">C</div>
+      <span class="logo-text">크레딧노트</span>
+    </div>
+    <div class="gnb">
+      <div class="menu-wrapper">
+        <a href="#" class="gnb-menu" id="menu-toggle">전체메뉴
+          <span class="hamburger"><i></i><i></i><i></i></span>
+        </a>
+        <div class="menu-popup" id="menu-popup">
+          <a href="#" class="menu-item">신용점수</a>
+          <a href="#" class="menu-item">마이페이지</a>
+          <a href="#" class="menu-item">로그인</a>
+          <a href="#" class="menu-item">회원가입</a>
+        </div>
+      </div>
+      <span class="search-icon" id="search-button"></span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div id="promo" class="card hero-promo">
+      <div class="kicker"><b>NEW</b> 안심케어 멤버십</div>
+      <div class="title">금융사기 피해<br>보상 혜택 강화</div>
+      <div class="placeholder">brand visual</div>
+    </div>
+    <div class="card score-card">
+      <div class="label">내 신용점수는?</div>
+      <div class="score-tabs">
+        <button class="score-tab active" data-type="loan">대출</button>
+        <button class="score-tab" data-type="card">카드</button>
+        <button class="score-tab" data-type="delinquent">연체</button>
+      </div>
+      <div class="score-value"><span class="num" id="score-value">?</span><span class="unit">점 ›</span></div>
+      <div class="spacer"></div>
+      <div class="score-info" id="score-info">대출 신용점수</div>
+    </div>
+    <div class="card income-card">
+      <div class="label">내 소득구간은?</div>
+      <div class="num">? <span>›</span></div>
+      <div class="spacer"></div>
+      <div class="foot">소득 변동 여부를 확인하세요</div>
+    </div>
+  </section>
+  <div class="dots"><i class="active"></i><i></i><i></i></div>
+
+  <section class="guards" id="guards">
+    <!-- Credit.js 가 보호 카드를 이 앞에 넣습니다 -->
+    <div class="stack span-2">
+      <div class="card banner mint">
+        <div><div class="sub">개인정보 보호 서비스</div><div class="main">이용권 번호 등록하기</div></div>
+        <div class="thumb"></div>
+      </div>
+      <div class="card banner violet">
+        <div><div class="sub">신용점수 영향없이</div><div class="main">대출한도 알아보기</div></div>
+        <div class="thumb"></div>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-title">이런 서비스는 어떠세요?</h2>
+  <section class="services" id="services"></section>
+
+  <section class="promo-row">
+    <div class="promo-gallery">
+      <div class="gallery-main">
+        <div class="gallery-slide active">
+          <div class="slide-content">
+            <div class="slide-title">보험 보장분석</div>
+            <div class="slide-desc">누적된 내 보험료<br><b>1분만에 확인하기 ›</b></div>
+          </div>
+          <div class="placeholder">banner 1</div>
+        </div>
+        <div class="gallery-slide">
+          <div class="slide-content">
+            <div class="slide-title">신용점수 상향</div>
+            <div class="slide-desc">신용점수를 올리는<br><b>맞춤 솔루션 ›</b></div>
+          </div>
+          <div class="placeholder">banner 2</div>
+        </div>
+        <div class="gallery-slide">
+          <div class="slide-content">
+            <div class="slide-title">대출한도 조회</div>
+            <div class="slide-desc">내 신용에 맞는<br><b>최대 한도 확인 ›</b></div>
+          </div>
+          <div class="placeholder">banner 3</div>
+        </div>
+        <div class="gallery-slide">
+          <div class="slide-content">
+            <div class="slide-title">명의도용 차단</div>
+            <div class="slide-desc">나의 정보를 안전하게<br><b>보호해드립니다 ›</b></div>
+          </div>
+          <div class="placeholder">banner 4</div>
+        </div>
+      </div>
+      <div class="gallery-thumbs">
+        <button class="thumb active" data-index="0"></button>
+        <button class="thumb" data-index="1"></button>
+        <button class="thumb" data-index="2"></button>
+        <button class="thumb" data-index="3"></button>
+      </div>
+    </div>
+    <div class="card card-promo span-2">
+      <div><div class="sub">이번 달</div><div class="main">혜택 좋은 카드는?</div></div>
+      <div class="placeholder">card image</div>
+    </div>
+  </section>
+
+  <h2 class="section-title">모르면 손해, 놓치면 안되는 <span class="accent">혜택 정보</span></h2>
+  <section class="benefits" id="benefits"></section>
+
+  <h2 class="section-title">세상에 이런 혜택이</h2>
+  <section class="tiles" id="tiles">
+    <div class="card tiles-lead">무료 보장분석부터<br>자동차 보험 혜택까지</div>
+  </section>
+
+  <section class="notice">
+    <a href="#" class="head">알려드려요 ›</a>
+    <a href="#" class="item">신용변동알림 일시 중단 안내</a>
+    <span class="date">2026.09.23</span>
+  </section>
+</div>
+
+<div class="search-modal" id="search-modal">
+  <div class="search-modal-overlay"></div>
+  <div class="search-modal-content">
+    <div class="search-header">
+      <button class="search-close" id="search-close">×</button>
+    </div>
+    <div class="search-body">
+      <div class="search-icon-large"></div>
+      <input type="text" class="search-input" id="search-input" placeholder="검색어 입력">
+      <div class="search-divider"></div>
+      <div class="search-tags">
+        <span class="search-tag">신용점수</span>
+        <span class="search-tag">대출한도</span>
+        <span class="search-tag">신용조회</span>
+        <span class="search-tag">카드추천</span>
+        <span class="search-tag">연체해결</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <nav class="footer-nav">
+        <a href="#">회사소개</a><a href="#">개인정보처리방침</a><a href="#">이용약관</a><a href="#">저작권 정책</a><a href="#">사이트맵</a>
+      </nav>
+      <div class="footer-info">
+        (주)크레딧노트 | 서울특별시 서초구 양재동 245-8 | 대표이사 김유안<br>
+        사업자등록번호 123-58-00891 | 통신판매업신고 0000-서울-0000호<br>
+        COPYRIGHT © CREDITNOTE. ALL RIGHTS RESERVED.
+      </div>
+    </div>
+    <div class="footer-right">
+      <div class="cs"><span class="label">고객센터</span><span class="tel">1600-0000</span></div>
+      <div class="cs-mail">help@creditnote.example</div>
+    </div>
+  </div>
+</footer>
+
+<script src="./js/Credit.js"></script>
+</body>
+</html>

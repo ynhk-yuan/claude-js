@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+</head>
+<body>
+    <h1>사용자 목록</h1>
+    <!-- 목록이 렌더링될 영역 -->
+    <div id="app"></div>
+
+    <script>
+        // [설명] 재사용 가능한 비동기 함수: URL을 받아 JSON 데이터를 반환
+        const fetchJson = async (url) => {
+            // [설명] fetch 호출 후 응답이 올 때까지 await로 대기
+            const response = await fetch(url);
+            // [설명] fetch는 404/500에서도 reject하지 않으므로 ok 여부를 직접 검사
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            // [설명] 응답 본문을 JSON으로 파싱하여 반환
+            return await response.json();
+        };
+
+        // [설명] 재사용 가능한 렌더링 함수: 배열과 항목 변환 함수를 받아 ul/li 목록을 생성
+        const renderList = (container, items, toText) => {
+            // [설명] ul 요소 생성
+            const ul = document.createElement('ul');
+            // [설명] 각 항목을 li로 만들어 ul에 추가 (textContent 사용으로 XSS 방지)
+            items.forEach((item) => {
+                const li = document.createElement('li');
+                li.textContent = toText(item);
+                ul.appendChild(li);
+            });
+            // [설명] 기존 내용을 비우고 새 목록을 화면에 출력
+            container.replaceChildren(ul);
+        };
+
+        // [설명] 메인 비동기 함수: 데이터 요청 → 화면 출력, 오류 시 메시지 표시
+        const showUsers = async () => {
+            const app = document.getElementById('app');
+            try {
+                const users = await fetchJson('https://jsonplaceholder.typicode.com/users');
+                // [설명] 이름과 이메일을 "이름 (이메일)" 형태로 출력
+                renderList(app, users, (u) => `${u.name} (${u.email})`);
+            } catch (error) {
+                app.textContent = `불러오기 실패: ${error.message}`;
+            }
+        };
+
+        // [설명] 실행
+        showUsers();
+    </script>
+</body>
+</html>

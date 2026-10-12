@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1 id="claude">hello, world★</h1>
+    <p class="name">홍길동</p>
+    <button>이름 변경</button>
+
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal">김길동</div>
+    </div>
+
+    <script>
+        const h1 = document.getElementById("claude")
+        h1.innerText = "안녕!"
+
+        // dom을 이용해서 이름을 변경하기
+        // 단, 클래스를 활용하기!
+
+        const name = document.querySelector(".name")
+        console.log(name)
+        name.innerText = "홍길동"
+
+        const button = document.querySelector("button")
+        const p = document.querySelector("p")
+        const modalOverlay = document.getElementById("modalOverlay")
+
+        button.addEventListener("click", (e) => {
+            console.log(e)
+            console.log("버튼 눌림!")
+            p.innerText = "김유안"
+            modalOverlay.classList.add("active")
+        })
+
+        modalOverlay.addEventListener("click", (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove("active")
+            }
+        })
+    </script>
+</body>
+</html>
